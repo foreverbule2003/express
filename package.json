@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1",
-    "express-generator": "^4.16.1"
+    "express-generator": "^4.16.1",
+    "nodemon": "^1.19.2"
   },
   "devDependencies": {
     "@wdio/cli": "^5.13.1",
@@ -18,7 +19,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/wdio wdio.conf.js"
+    "wdio": "./node_modules/.bin/wdio wdio.conf.js",
+    "server": "node_modules/nodemon/bin/nodemon.js app.js"
   },
   "keywords": [],
   "author": "",
