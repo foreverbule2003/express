@@ -6,7 +6,9 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-generator": "^4.16.1",
-    "nodemon": "^1.19.2"
+    "lodash": "^4.17.15",
+    "nodemon": "^1.19.2",
+    "sqlite3": "^4.1.0"
   },
   "devDependencies": {
     "@wdio/cli": "^5.13.1",
