@@ -1,11 +1,37 @@
-const assert = require('assert')
-const url = 'https://uatflight.settour.com.tw/availableSearch?adtCount=1&chdCount=0&pfpClass=&directFlightOnly=true&depDate=20191113,20191115&depAirportCode=TPE,NRT&arrAirportCode=NRT,TPE&tripType=RT&cms=xxx&cmsPrice=0'
+const assert = require('assert');
+const {
+  fileIoInit,
+  DBInit,
+  DBtableInit,
+  DBinsert,
+  DBquery,
+} = require('../model');
+const { get, isEmpty } = require('lodash');
 
-describe('webdriver.io page', () => {
-    it('should have the right title', () => {
-        browser.url(url);
-        // const title = browser.getTitle()
-        // assert.strictEqual(title, 'WebdriverIO · Next-gen WebDriver test framework for Node.js')
-        browser.pause(5000)
+let data = [];
+
+~async function () {
+  console.log('run async immf');
+  const db = await DBInit();
+  await db.run(DBtableInit);
+  await db.all(DBquery, false, (err, table) => {
+    data = [...table];
+  })
+}()
+
+describe('webdriver.io page', async () => {
+
+  it('init', () => {
+
+  })
+
+  it('get Url from DB', () => {
+    console.log('DB data', data);
+
+    data.map(d => {
+      browser.url(d.content)
     })
+    browser.pause(5000)
+  })
+
 })

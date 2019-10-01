@@ -35,7 +35,8 @@ const DBInit = () => {
 
 const DBtableInit = "CREATE TABLE IF NOT EXISTS url (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, done BOOLEAN, createdAt TEXT DEFAULT CURRENT_TIMESTAMP)";
 const DBinsert = "INSERT INTO url(content, done) VALUES(?,?)";
-const DBquery = "SELECT id, content, done, datetime(createdAt, 'localtime') as createdAt FROM url";
+// const DBquery = "SELECT id, content, done, datetime(createdAt, 'localtime') as createdAt FROM url";
+const DBquery = "SELECT id, content, done, datetime(createdAt, 'localtime') as createdAt FROM url where done=0";
 const DBupdate = "update url set content=? where content=?";
 const DBupdated = "SELECT id, content FROM url where content=?"
 
@@ -78,5 +79,4 @@ module.exports = {
   DBtableInit,
   DBinsert,
   DBquery,
-
 }
