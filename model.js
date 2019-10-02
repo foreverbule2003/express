@@ -37,7 +37,7 @@ const DBtableInit = "CREATE TABLE IF NOT EXISTS url (id INTEGER PRIMARY KEY AUTO
 const DBinsert = "INSERT INTO url(content, done) VALUES(?,?)";
 // const DBquery = "SELECT id, content, done, datetime(createdAt, 'localtime') as createdAt FROM url";
 const DBquery = "SELECT id, content, done, datetime(createdAt, 'localtime') as createdAt FROM url where done=0";
-const DBupdate = "update url set content=? where content=?";
+const DBupdate = "update url set done=? where done=?";
 const DBupdated = "SELECT id, content FROM url where content=?"
 
 startDB = () => {
@@ -79,4 +79,5 @@ module.exports = {
   DBtableInit,
   DBinsert,
   DBquery,
+  DBupdate,
 }

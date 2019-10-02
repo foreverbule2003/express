@@ -1,10 +1,8 @@
-const assert = require('assert');
 const {
-  fileIoInit,
   DBInit,
   DBtableInit,
-  DBinsert,
   DBquery,
+  DBupdate,
 } = require('../model');
 const { get, isEmpty } = require('lodash');
 
@@ -14,7 +12,7 @@ let data = [];
   console.log('run async immf');
   const db = await DBInit();
   await db.run(DBtableInit);
-  await db.all(DBquery, false, (err, table) => {
+  await db.all(DBquery, (err, table) => {
     data = [...table];
   })
 }()
@@ -22,16 +20,33 @@ let data = [];
 describe('webdriver.io page', async () => {
 
   it('init', () => {
-
+    // console.log('DB data', data);
+    console.log('this part must exist for get DB data ');
   })
 
-  it('get Url from DB', () => {
-    console.log('DB data', data);
+  it('get Url from DB', function () {
+    console.log('DB data \n', data);
+    if (isEmpty(data)) this.skip();
+    data.map(d => browser.url(d.content));
+    browser.pause(1000);
+  })
 
-    data.map(d => {
-      browser.url(d.content)
-    })
-    browser.pause(5000)
+  it('update url state', function () {
+    if (isEmpty(data)) this.skip();
+
+    ~async function () {
+      console.log('almost done!!!');
+      try {
+        const db = await DBInit();
+        await db.run(DBtableInit);
+        await db.run(DBupdate, [1, 0])
+      } catch (err) {
+        console.log(`
+        === Something Wrong !!! ====
+        ${err}
+        `);
+      }
+    }()
   })
 
 })
